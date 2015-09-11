@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/led.c</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/switch.h</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/main.c</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/timer.h</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/interrupt.c</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/interrupt.h</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/timer.c</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/switch.c</file>
-            <file>file:/C:/Users/Matt/Dropbox/School/Junior/Fall%202015/ECE%20372A/Labs/Lab%200/Lab0.X/led.h</file>
+            <file>file:/C:/Users/Matt/MPLABXProjects/Lab0.X/switch.c</file>
+            <file>file:/C:/Users/Matt/MPLABXProjects/Lab0.X/config.h</file>
+            <file>file:/C:/Users/Matt/MPLABXProjects/Lab0.X/timer.c</file>
         </group>
     </open-files>
 </project-private>
