@@ -18,7 +18,7 @@
 
 //DONE: Define states of the state machine
 typedef enum stateTypeEnum{
-    led1, led2, led3, wait, wait2, debouncePress, debounceRelease, debounceRelease2
+    led1, led2, led3, wait, debouncePress, debounceRelease
 } stateType;
 
 //TODO: Use volatile variables that change within interrupts
@@ -36,49 +36,74 @@ int main() {
     initTimer1();
     
     unsigned int numbLED;
+    unsigned int countTime;
     
     while(1){
         switch(state) {
             case wait:
-                IFS1bits.CNDIF = 0;
-                
-                break;
-                
-            case wait2:
-                
+                countTime = 0;
+                while (PORTDbits.RD6 == 1) {
+                    ONE SECOND
+                    countTime++;
+                }
+                state = debounceRelease;
                 break;
                 
             case led1:
                 numbLED = 1;
                 turnOnLED(1); // Turns on LED 1. Off LED 2, 3;
-                if (IFS1bits.CNDIF == 1) {
-                    state = wait;
+                if (PORTDbits.RD6 == 1) {
+                    state = debouncePress;
+                }
                 break;
                 
             case led2:
                 numbLED = 2;
                 turnOnLED(2); // Turns on LED 2. Off LED 1, 3.
-                if (IFS1bits.CNDIF == 1) {
-                    state = wait;
+                if (PORTDbits.RD6 == 1) {
+                    state = debouncePress;
+                }
                 break;
                 
             case led3:
                 numbLED = 3;
                 turnOnLED(3); // Turns on LED 3. Off LED 1, 2.
-                if (IFS1bits.CNDIF == 1) {
-                    state = wait;
+                if (PORTDbits.RD6 == 1) {
+                    state = debouncePress;
+                }
                 break;
                 
             case debouncePress:
                 delayMs(50);
+                state = wait;
                 break;
                 
             case debounceRelease:
                 delayMs(50);
-                break;
-                
-            case debounceRelease2:
-                delayMs(50);
+                if (numbLED == 1) {
+                    if (countTime < 2) {
+                        state = led2;
+                    }
+                    else {
+                        state = led3;
+                    }
+                }
+                if (numbLED == 2) {
+                    if (countTime < 2) {
+                        state = led3;
+                    }
+                    else {
+                        state = led1;
+                    }
+                }
+                if (numbLED == 3) {
+                    if (countTime < 2) {
+                        state = led1;
+                    }
+                    else {
+                        state = led2;
+                    }
+                }
                 break;
         }
         //TODO: Implement a state machine to create the desired functionality
