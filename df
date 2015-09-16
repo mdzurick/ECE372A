@@ -1,0 +1,29 @@
+[33mcommit 9643162ba4f7e398ba86ca27c4a9bf26be8a425c[m
+Author: mdzurick <mdzurick@email.arizona.edu>
+Date:   Wed Sep 16 14:50:05 2015 -0700
+
+     Build and Clean- Found errors.  Fixed and finished out main.c.  I also changed from using the flags to looking at the ports.
+
+[33mcommit b4a1c16f8c9741847ce7a5903dc1d82aaba269ec[m
+Author: mdzurick <mdzurick@email.arizona.edu>
+Date:   Wed Sep 16 14:18:45 2015 -0700
+
+    Made switch.c and working on main.c. Office Hours.
+
+[33mcommit ffc71fb043007dd31fc817f75cbc15388c377a99[m
+Author: mdzurick <mdzurick@email.arizona.edu>
+Date:   Fri Sep 11 14:42:47 2015 -0700
+
+    Deleted q file
+
+[33mcommit 9c7fef0444ef16178a8d962c1f2d490bde84ab96[m
+Author: mdzurick <mdzurick@email.arizona.edu>
+Date:   Fri Sep 11 14:41:32 2015 -0700
+
+    Edited File during office hours.
+
+[33mcommit df830400d1816a17faec87c3d034fbfdeed4f5b2[m
+Author: mdzurick <mdzurick@email.arizona.edu>
+Date:   Fri Sep 11 13:30:57 2015 -0700
+
+    Initial commit for Lab 0.
