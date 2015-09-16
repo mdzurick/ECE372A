@@ -46,6 +46,8 @@ int main() {
                     ONE SECOND
                     countTime++;
                 }
+                // Instead use some sort of interrupt thing.
+                // Look at lecture 5 main.c file.
                 state = debounceRelease;
                 break;
                 
@@ -106,8 +108,7 @@ int main() {
                 }
                 break;
         }
-        //TODO: Implement a state machine to create the desired functionality
-        
+        //TODO: Implement a state machine to create the desired functionality  
     }
     
     return 0;
