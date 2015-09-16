@@ -41,7 +41,7 @@ void initTimer2(){
     
     T1CONbits.TCKPS = 0b111; // Prescalar enabled to 256.
     
-    T2CONbits.TCS = 0;
+    T2CONbits.TCS = 0; // Configures the oscillator.
     
     IEC0bits.T2IE = 1; // Enable the interrupt.
     IFS0bits.T2IF = 0; // Interrupt flag is down.
