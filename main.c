@@ -39,20 +39,23 @@ int main() {
     unsigned int numbLED;
     unsigned int countTime;
     
-    while(1){
+    while(1) {
         switch(state) {
             case wait:
-                countTime = 0;
                 countInterruptTime = 0;
-                while (PORTDbits.RD6 == 1) {} ;
-                countTime = countInterruptTime;
+                while (PORTDbits.RD6 == 0) {} ; // Use timer ON/OFF in order to control the counter.
+                T1CONbits.TON = 0; // Turns off the timer.
                 state = debounceRelease;
                 break;
                 
             case led1:
                 numbLED = 1;
                 turnOnLED(1); // Turns on LED 1. Off LED 2, 3;
-                if (PORTDbits.RD6 == 1) {
+                IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                T1CONbits.TON = 1; // Turns on the timer.
+                if (PORTDbits.RD6 == 0) {
+                    IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                    T1CONbits.TON = 1; // Turns on the timer.
                     state = debouncePress;
                 }
                 break;
@@ -60,7 +63,9 @@ int main() {
             case led2:
                 numbLED = 2;
                 turnOnLED(2); // Turns on LED 2. Off LED 1, 3.
-                if (PORTDbits.RD6 == 1) {
+                if (PORTDbits.RD6 == 0) {
+                    IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                    T1CONbits.TON = 1; // Turns on the timer.
                     state = debouncePress;
                 }
                 break;
@@ -68,7 +73,11 @@ int main() {
             case led3:
                 numbLED = 3;
                 turnOnLED(3); // Turns on LED 3. Off LED 1, 2.
-                if (PORTDbits.RD6 == 1) {
+                IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                T1CONbits.TON = 1; // Turns on the timer.
+                if (PORTDbits.RD6 == 0) {
+                    IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                    T1CONbits.TON = 1; // Turns on the timer.
                     state = debouncePress;
                 }
                 break;
@@ -115,4 +124,8 @@ int main() {
 void __ISR(_TIMER_1_VECTOR, IPL3SRS) _T1Interrupt(){
     IFS0bits.T1IF = 0; // Puts down the interrupt flag.
     countInterruptTime++;
+}
+
+void __ISR(_TIMER_2_VECTOR, IPL3SRS) _T2Interrupt(){
+    IFS0bits.T2IF = 0; // Puts down the interrupt flag.
 }
