@@ -23,7 +23,7 @@ void initTimer1(){
     
     TMR1 = 0; // Enables register for Timer 1.
     PR1 = prValue;
-    
+    ;
     T1CONbits.TCKPS = 0b11; // Prescalar enabled with choice of 256.
     
     T1CONbits.TCS = 0; // Configures the oscillator.
@@ -39,7 +39,7 @@ void initTimer2(){
     //DONE: Initialize Timer 2.
     TMR2 = 0; // Enables register for Timer 2.
     
-    T1CONbits.TCKPS = 0b0111; // Prescalar enabled to 256.
+    T1CONbits.TCKPS = 0b111; // Prescalar enabled to 256.
     
     T2CONbits.TCS = 0; // Configures the oscillator.
     

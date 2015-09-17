@@ -23,6 +23,7 @@ typedef enum stateTypeEnum{
 
 //TODO: Use volatile variables that change within interrupts
 volatile stateType state = led1;
+volatile unsigned int countInterruptTime;
 
 int main() {
     
@@ -42,12 +43,9 @@ int main() {
         switch(state) {
             case wait:
                 countTime = 0;
-                while (PORTDbits.RD6 == 1) {
-                    ONE SECOND
-                    countTime++;
-                }
-                // Instead use some sort of interrupt thing.
-                // Look at lecture 5 main.c file.
+                countInterruptTime = 0;
+                while (PORTDbits.RD6 == 1) {} ;
+                countTime = countInterruptTime;
                 state = debounceRelease;
                 break;
                 
@@ -114,3 +112,7 @@ int main() {
     return 0;
 }
 
+void __ISR(_TIMER_1_VECTOR, IPL3SRS) _T1Interrupt(){
+    IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+    countInterruptTime++;
+}
