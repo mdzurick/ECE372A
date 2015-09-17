@@ -28,14 +28,14 @@ void turnOnLED(int led){
     //TODO: You may choose to write this function
     // as a matter of convenience
     if (led == 1) {
-        LATDbits.LATD0 = 1; // Writes logic high to LED 1.
         LATDbits.LATD1 = 0; // Writes logic low to LED 2.
         LATDbits.LATD2 = 0; // Writes logic low to LED 3.
+        LATDbits.LATD0 = 1; // Writes logic high to LED 1.
     }
     else if (led == 2) {
         LATDbits.LATD0 = 0; // Writes logic low to LED 1.
-        LATDbits.LATD1 = 1; // Writes logic high to LED 2.
         LATDbits.LATD2 = 0; // Writes logic low to LED 3.
+        LATDbits.LATD1 = 1; // Writes logic high to LED 2.
     }
     else { // (led == 3)
         LATDbits.LATD0 = 0; // Writes logic low to LED 1.

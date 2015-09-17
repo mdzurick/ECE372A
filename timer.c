@@ -39,13 +39,12 @@ void initTimer2(){
     //DONE: Initialize Timer 2.
     TMR2 = 0; // Enables register for Timer 2.
     
-    T2CONbits.TCKPS = 0x7;
-    
+    T2CONbits.TCKPS = 0x7;    
     T2CONbits.TCS = 0; // Configures the oscillator.
-    
-    IEC0bits.T2IE = 1; // Enable the interrupt.
     IFS0bits.T2IF = 0; // Interrupt flag is down.
-    IPC2bits.T2IP = 3; // Set the interrupt priority.
+//    IPC2bits.T2IP = 3; // Set the interrupt priority.
+//    IEC0bits.T2IE = 1; // Enable the interrupt.
+
 }
 
 void delayMs(int delay){

@@ -17,115 +17,107 @@
 #define INPUT 1
 
 //DONE: Define states of the state machine
-typedef enum stateTypeEnum{
+
+typedef enum stateTypeEnum {
     led1, led2, led3, wait, debouncePress, debounceRelease
 } stateType;
 
 //TODO: Use volatile variables that change within interrupts
 volatile stateType state = led1;
-volatile unsigned int countInterruptTime;
+volatile unsigned int countInterruptTime = 0;
 
 int main() {
-    
+
     //This function is necessary to use interrupts. 
     enableInterrupts();
-    
+
     //TODO: Write each initialization function
     initSwitch1();
     initLEDs();
     initTimer2();
     initTimer1();
-    
+
     unsigned int numbLED;
-    unsigned int countTime;
-    
-    while(1) {
-        switch(state) {
+
+    while (1) {
+        switch (state) {
             case wait:
                 countInterruptTime = 0;
-                while (PORTDbits.RD6 == 0) {} ; // Use timer ON/OFF in order to control the counter.
+                while (PORTDbits.RD6 == 0) {}; // Use timer ON/OFF in order to control the counter.
                 T1CONbits.TON = 0; // Turns off the timer.
                 state = debounceRelease;
                 break;
-                
+
             case led1:
-                numbLED = 1;
                 turnOnLED(1); // Turns on LED 1. Off LED 2, 3;
-                IFS0bits.T1IF = 0; // Puts down the interrupt flag.
-                T1CONbits.TON = 1; // Turns on the timer.
+                numbLED = 1;
                 if (PORTDbits.RD6 == 0) {
-                    IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                    TMR1 = 0;
                     T1CONbits.TON = 1; // Turns on the timer.
                     state = debouncePress;
                 }
                 break;
-                
+
             case led2:
-                numbLED = 2;
                 turnOnLED(2); // Turns on LED 2. Off LED 1, 3.
+                numbLED = 2;
                 if (PORTDbits.RD6 == 0) {
-                    IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                    TMR1 = 0;
                     T1CONbits.TON = 1; // Turns on the timer.
                     state = debouncePress;
                 }
                 break;
-                
+
             case led3:
-                numbLED = 3;
                 turnOnLED(3); // Turns on LED 3. Off LED 1, 2.
-                IFS0bits.T1IF = 0; // Puts down the interrupt flag.
-                T1CONbits.TON = 1; // Turns on the timer.
+                numbLED = 3;
                 if (PORTDbits.RD6 == 0) {
-                    IFS0bits.T1IF = 0; // Puts down the interrupt flag.
+                    TMR1 = 0;
                     T1CONbits.TON = 1; // Turns on the timer.
                     state = debouncePress;
                 }
                 break;
-                
+
             case debouncePress:
                 delayMs(50);
                 state = wait;
                 break;
-                
+
             case debounceRelease:
                 delayMs(50);
                 if (numbLED == 1) {
-                    if (countTime < 2) {
+                    if (countInterruptTime < 2) {
                         state = led2;
-                    }
-                    else {
+                    } else {
                         state = led3;
                     }
-                }
-                if (numbLED == 2) {
-                    if (countTime < 2) {
+                } else if (numbLED == 2) {
+                    if (countInterruptTime < 2) {
                         state = led3;
-                    }
-                    else {
+                    } else {
                         state = led1;
                     }
-                }
-                if (numbLED == 3) {
-                    if (countTime < 2) {
+                } else { // if (numbLED == 3) {
+                    if (countInterruptTime < 2) {
                         state = led1;
-                    }
-                    else {
+                    } else {
                         state = led2;
                     }
                 }
                 break;
         }
-        //TODO: Implement a state machine to create the desired functionality  
     }
-    
+
     return 0;
 }
 
-void __ISR(_TIMER_1_VECTOR, IPL3SRS) _T1Interrupt(){
+void __ISR(_TIMER_1_VECTOR, IPL3SRS) _T1Interrupt() {
     IFS0bits.T1IF = 0; // Puts down the interrupt flag.
     countInterruptTime++;
 }
 
+/*
 void __ISR(_TIMER_2_VECTOR, IPL3SRS) _T2Interrupt(){
     IFS0bits.T2IF = 0; // Puts down the interrupt flag.
 }
+ */
