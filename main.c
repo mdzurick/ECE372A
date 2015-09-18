@@ -38,14 +38,14 @@ int main() {
     //DONE: Write each initialization function
     initSwitch1(); // Initializes the switch.
     initLEDs(); // Initializes the 3 LEDs.
-//    initTimer2(); // Initializes our one second timer.
+    initTimer2(); // Initializes our one second timer.
     initTimer1(); // Initializes our millisecond timer.
-    
+
     //This function is necessary to use interrupts. 
     enableInterrupts(); // This enables our interrupts (provided).
-    
+
     unsigned int numbLED = 1; // Variable will be used to keep track of which LED was the previous state.
-    unsigned int movement = 0;
+    unsigned int movement = FORWARD;
 
     while (1) { // While the microcontroller is programmed we are ALWAYS in this loop after setup.
         switch (state) {
@@ -55,23 +55,13 @@ int main() {
                     if (IFS0bits.T1IF == FLAG_DOWN) {
                         T1CONbits.TON = 0; // Turns off the timer. (so that countInterruptTime counter is stopped).
                         movement = FORWARD;
-                    }
-                    else {
+                    } else {
                         T1CONbits.TON = 0; // Turns off the timer. (so that countInterruptTime counter is stopped).
                         movement = BACKWARD;
                     }
                     state = debounceRelease;
                 }
                 break;
-/*
-            case waitRelease2:
-                if (SWITCH1 == UNPRESSED) {
-                    T1CONbits.TON = 0;
-                    movement = BACKWARD;
-                    state = debounceRelease;
-                }
-                break;
-*/
 
                 /* led1: State where LED 1 is on and others are off.  Waiting for button press. */
             case led1:
@@ -111,32 +101,30 @@ int main() {
 
                 /* debouncePress: Debounces the switch with a 50 millisecond delay. */
             case debouncePress:
-//                delayMs(55); // Delays for 50 milliseconds in order to debounce the switch.
+                delayMs(55); // Delays for 55 milliseconds in order to debounce the switch.
                 state = waitRelease;
                 break;
 
                 /* debounceRelease: Debounces the switch release with a 50 millisecond delay.  Then reoutes to the next LED. */
             case debounceRelease:
-//                delayMs(55); // Delays for 50 milliseconds in order to debounce the switch.
-                if (SWITCH1 == UNPRESSED) {
-                    if (numbLED == 1) { // Checks if previous LED was 1.
-                        if (movement == FORWARD) { // If the held for less than two seconds...
-                            state = led2;
-                        } else { //  If held for more than two seconds...
-                            state = led3;
-                        }
-                    } else if (numbLED == 2) { // Checks if previous LED was 2.
-                        if (movement == FORWARD) { // If the held for less than two seconds...
-                            state = led3;
-                        } else { //  If held for more than two seconds...
-                            state = led1;
-                        }
-                    } else { // if (numbLED == 3) { // Checks if previous LED was 3.
-                        if (movement == FORWARD) { // If the held for less than two seconds...
-                            state = led1;
-                        } else { //  If held for more than two seconds...
-                            state = led2;
-                        }
+                delayMs(55); // Delays for 55 milliseconds in order to debounce the switch.
+                if (numbLED == 1) { // Checks if previous LED was 1.
+                    if (movement == FORWARD) { // If the held for less than two seconds...
+                        state = led2;
+                    } else { //  If held for more than two seconds...
+                        state = led3;
+                    }
+                } else if (numbLED == 2) { // Checks if previous LED was 2.
+                    if (movement == FORWARD) { // If the held for less than two seconds...
+                        state = led3;
+                    } else { //  If held for more than two seconds...
+                        state = led1;
+                    }
+                } else { // if (numbLED == 3) { // Checks if previous LED was 3.
+                    if (movement == FORWARD) { // If the held for less than two seconds...
+                        state = led1;
+                    } else { //  If held for more than two seconds...
+                        state = led2;
                     }
                 }
                 break;
@@ -155,7 +143,7 @@ void __ISR(_TIMER_1_VECTOR, IPL3SRS) _T1Interrupt() {
         state = waitRelease2;
     }
 }
-*/
+ */
 
 /*
 void __ISR(_TIMER_2_VECTOR, IPL3SRS) _T2Interrupt(){

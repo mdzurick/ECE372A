@@ -1,6 +1,6 @@
 /* 
  * File:   switch.h
- * Author: gvanhoy
+ * Author: mdzurick
  *
  * Created on August 27, 2015, 3:12 PM
  */
