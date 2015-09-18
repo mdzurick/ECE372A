@@ -51,7 +51,8 @@ void delayMs(int delay){
     //DONE: Using timer 2, create a delay
     // that is delay amount of ms.
     unsigned int prValue = (unsigned int)(((FREQUENCY*delay)/(256*1000)) - 1);
-        
+    // unsigned int prValue = (unsigned int)(((FREQUENCY*delay)/256*1000) - 1);
+    
     TMR2 = 0;
     PR2 = prValue; // Sets the PR value.
     
@@ -61,5 +62,6 @@ void delayMs(int delay){
         // Wait for it to end!
     }
     IFS0bits.T2IF = 0; // Interrupt flag is down.
+    
     T2CONbits.TON = 0; // Turns off Timer 2.
 }

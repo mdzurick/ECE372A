@@ -42,7 +42,6 @@ int main() {
     while (1) {
         switch (state) {
             case wait:
-                countInterruptTime = 0;
                 while (PORTDbits.RD6 == 0) {}; // Use timer ON/OFF in order to control the counter.
                 T1CONbits.TON = 0; // Turns off the timer.
                 state = debounceRelease;
@@ -53,7 +52,8 @@ int main() {
                 numbLED = 1;
                 if (PORTDbits.RD6 == 0) {
                     TMR1 = 0;
-                    T1CONbits.TON = 1; // Turns on the timer.
+                    countInterruptTime = 0;
+                    T1CONbits.ON = 1; // Turns on the timer.
                     state = debouncePress;
                 }
                 break;
@@ -63,7 +63,8 @@ int main() {
                 numbLED = 2;
                 if (PORTDbits.RD6 == 0) {
                     TMR1 = 0;
-                    T1CONbits.TON = 1; // Turns on the timer.
+                    T1CONbits.ON = 1; // Turns on the timer.
+                    countInterruptTime = 0;
                     state = debouncePress;
                 }
                 break;
@@ -73,7 +74,8 @@ int main() {
                 numbLED = 3;
                 if (PORTDbits.RD6 == 0) {
                     TMR1 = 0;
-                    T1CONbits.TON = 1; // Turns on the timer.
+                    T1CONbits.ON = 1; // Turns on the timer.
+                    countInterruptTime = 0;
                     state = debouncePress;
                 }
                 break;
