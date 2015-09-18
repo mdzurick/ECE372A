@@ -31,9 +31,9 @@ void initTimer1(){
     
     T1CONbits.TCS = 0; // Configures the oscillator.
     
-    IEC0bits.T1IE = 1; // Enable the interrupt.
+//   IEC0bits.T1IE = 1; // Enable the interrupt.
     IFS0bits.T1IF = FLAG_DOWN; // Interrupt Flag is now down.
-    IPC1bits.T1IP = 3; // Set the interrupt priority.
+//    IPC1bits.T1IP = 3; // Set the interrupt priority.
     
     // T1CONbits.TON = 1; // Turns on the timer.
 }

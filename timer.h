@@ -8,7 +8,6 @@
 #ifndef TIMER_H
 #define	TIMER_H
 
-
 void initTimer1();
 void initTimer2();
 void delayMs(int delay);
