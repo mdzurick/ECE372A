@@ -35,6 +35,7 @@ void initTimer1(){
     // T1CONbits.TON = 1; // Turns on the timer.
 }
 
+
 void initTimer2(){
     //DONE: Initialize Timer 2.
     TMR2 = 0; // Enables register for Timer 2.
@@ -44,7 +45,7 @@ void initTimer2(){
     IFS0bits.T2IF = 0; // Interrupt flag is down.
 //    IPC2bits.T2IP = 3; // Set the interrupt priority.
 //    IEC0bits.T2IE = 1; // Enable the interrupt.
-
+    
 }
 
 void delayMs(int delay){
@@ -65,3 +66,4 @@ void delayMs(int delay){
     
     T2CONbits.TON = 0; // Turns off Timer 2.
 }
+

@@ -11,7 +11,7 @@
 #define INPUT 1
 
 void initSwitch1(){
-    //TODO: Initialize switch 1
+    //DONE: Initialize switch 1
     TRISDbits.TRISD6 = INPUT; // Configures switch as an input.
     CNPUDbits.CNPUD6 = 1; // Applies a pull-up resistor to the above switch.
     

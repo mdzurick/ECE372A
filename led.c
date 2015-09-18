@@ -25,7 +25,7 @@ void initLEDs(){
 }
 
 void turnOnLED(int led){
-    //TODO: You may choose to write this function
+    //DONE: You may choose to write this function
     // as a matter of convenience
     if (led == 1) {
         LATDbits.LATD1 = 0; // Writes logic low to LED 2.
